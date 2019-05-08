@@ -2,6 +2,7 @@
   <div class="bg">
     <!-- 欢迎语句 -->
     <div class="log-icon"></div>
+    <div>{{msg}}</div>
     <div class="wellcome-txt">{{$t('wellcome')}}</div>
     <!-- 公司简介 -->
     <div class="title">{{$t('profile')}}</div>
@@ -32,7 +33,9 @@ export default {
     ImgList
   },
   created () {
-    api.getIndexData().then(res => console.log(res), err => console.log(err))
+    api.getIndexData().then(res => {
+      this.msg = res.data.name
+    }).catch(err => console.log(err))
   }
 }
 </script>
@@ -85,3 +88,8 @@ export default {
 
 }
 </style>
+
+  function newFunction() {
+    throws;
+    err;
+  }

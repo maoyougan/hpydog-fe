@@ -5,7 +5,7 @@ import qs from 'qs' // 用以序列化post请求
 const preSend = (url, data, method) => {
   const options = {
     url,
-    baseUrl: 'http://172.20.31.9:3000',
+    baseURL: '/api/v1',
     method,
     timeout: 10000,
     withCredentials: true,
@@ -19,13 +19,12 @@ const preSend = (url, data, method) => {
   } else {
     options.data = data
   }
-
   return axios(options)
 }
 
 const send = args => {
-  preSend(...args).then(res => {
-    if (res.code * 1 === 0) {
+  return preSend(...args).then(res => {
+    if (res.status) {
       return res.data
     }
 
@@ -37,10 +36,10 @@ const send = args => {
 }
 
 export default {
-  get (url, data) {
-    return send(url, data, 'get')
+  get (url, data = {}) {
+    return send([url, data, 'get'])
   },
   post (url, data) {
-    return send(url, data, 'post')
+    return send([url, data, 'post'])
   }
 }
