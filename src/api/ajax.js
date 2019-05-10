@@ -24,11 +24,11 @@ const preSend = (url, data, method) => {
 
 const send = args => {
   return preSend(...args).then(res => {
-    if (res.status) {
-      return res.data
+    if (res.data.code * 1 === 200) {
+      return res.data.data
     }
 
-    throw res.data
+    throw res.data.data
   },
   err => {
     throw err

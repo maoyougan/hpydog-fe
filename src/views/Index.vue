@@ -1,12 +1,11 @@
 <template>
-  <div class="bg">
+  <div class="bg" v-if="data">
     <!-- 欢迎语句 -->
-    <div class="log-icon"></div>
-    <div>{{msg}}</div>
-    <div class="wellcome-txt">{{$t('wellcome')}}</div>
+    <img class="log-icon" :src="data.shopLogo">
+    <div class="wellcome-txt">{{data.shopWellcome}}</div>
     <!-- 公司简介 -->
-    <div class="title">{{$t('profile')}}</div>
-    <div class="profile-content">{{$t('profile-content')}}</div>
+    <div class="title">{{data.shopName}}</div>
+    <div class="profile-content">{{data.shopProfile}}</div>
     <!-- 货物类别 -->
     <div class="title">{{$t('goods-type')}}</div>
     <img-list />
@@ -26,15 +25,15 @@ export default {
   name: 'Index',
   data () {
     return {
-      msg: 'Index'
+      data: ''
     }
   },
   components: {
     ImgList
   },
   created () {
-    api.getIndexData().then(res => {
-      this.msg = res.data.name
+    api.getShopInfo().then(res => {
+      this.data = res
     }).catch(err => console.log(err))
   }
 }
@@ -88,8 +87,3 @@ export default {
 
 }
 </style>
-
-  function newFunction() {
-    throws;
-    err;
-  }
